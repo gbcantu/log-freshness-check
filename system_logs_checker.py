@@ -24,7 +24,7 @@ import argparse
 import logging
 import os
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime
 
 import openpyxl
 
@@ -114,6 +114,14 @@ def main():
 
     workbook.save(args.output)
     logging.info("Report saved to %s", args.output)
+
+    ok_count = len(LOG_FILES) - issues
+    logging.info(
+        "Summary: %d OK, %d issue(s) out of %d file(s).",
+        ok_count,
+        issues,
+        len(LOG_FILES),
+    )
 
     if issues:
         logging.warning("%d issue(s) found.", issues)
